@@ -35,6 +35,20 @@ classdef GatedClickTests < matlab.unittest.TestCase
                 clickAmplitude * expectedUnattenuated...
             );
         end
+        
+        function roundsUnevenSamples(self)
+            self.sampleRateHz = 5;
+            self.clickDurationSeconds = 0.35;
+            self.gapDurationSeconds = 0.95;
+            self.level_dB_SPL = 45;
+            self.fullScaleLevel_dB_SPL = 103;
+            expectedUnattenuated = [1; 1; 0; 0; 0; 0; 0; 1; 1];
+            clickAmplitude = 10^((45-103)/20) / rms(expectedUnattenuated);
+            self.assertEqual(...
+                self.gatedClick,...
+                clickAmplitude * expectedUnattenuated...
+            );
+        end
     end
     
     methods (Access = private)

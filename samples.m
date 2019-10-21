@@ -1,3 +1,3 @@
 function N = samples(rateHz, seconds)
-N = rateHz * seconds;
+N = round(rateHz * seconds);
 end
